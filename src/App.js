@@ -177,6 +177,16 @@ export default function NexoraPrime() {
           display: none;
         }
 
+        .logo-mark {
+          width: 100px;
+          height: 100px;
+        }
+
+        .hero-side-card {
+          width: 380px;
+          max-width: 100%;
+        }
+
         @media (max-width: 768px) {
           nav {
             padding: 0 1rem !important;
@@ -220,6 +230,74 @@ export default function NexoraPrime() {
             width: 100%;
             justify-content: center;
             margin-top: 0.5rem;
+          }
+
+          .logo-mark {
+            width: 40px;
+            height: 40px;
+          }
+
+          section {
+            padding-left: 1.25rem !important;
+            padding-right: 1.25rem !important;
+          }
+
+          #about, #services, #why-us, #contact {
+            padding-top: 4rem !important;
+            padding-bottom: 4rem !important;
+          }
+
+          .hero-grid {
+            gap: 2.5rem !important;
+          }
+
+          .hero-side-card {
+            width: 100% !important;
+            padding: 1.75rem !important;
+          }
+
+          .about-card {
+            padding: 2rem !important;
+            min-height: unset !important;
+          }
+
+          .contact-info-card,
+          .contact-form-card {
+            padding: 2rem !important;
+          }
+
+          .contact-person-row {
+            flex-wrap: wrap;
+          }
+
+          .person-photo {
+            width: 72px !important;
+            height: 72px !important;
+          }
+
+          .footer-grid {
+            text-align: center;
+            justify-content: center !important;
+          }
+
+          .footer-links {
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.25rem !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .stats-grid {
+            grid-template-columns: 1fr !important;
+          }
+
+          .stat-card {
+            padding: 1.75rem 1.25rem !important;
+          }
+
+          h1, h2, h3 {
+            word-break: break-word;
           }
         }
 
@@ -350,7 +428,7 @@ export default function NexoraPrime() {
       }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-            <img src="/favicon.ico" alt="Nexora Prime" style={{ width: 100, height: 100, borderRadius: "10px", objectFit: "contain" }} />
+            <img src="/favicon.ico" alt="Nexora Prime" className="logo-mark" style={{ borderRadius: "10px", objectFit: "contain" }} />
             <span style={{ color: COLORS.white, fontWeight: 700, fontSize: "1.1rem", letterSpacing: "-0.01em" }}>
               Nexora<span style={{ color: COLORS.pale, fontFamily: "'DM Serif Display', serif", fontStyle: "italic" }}>Prime</span>
             </span>
@@ -447,7 +525,7 @@ export default function NexoraPrime() {
               </div>
               <h1 style={{
                 fontFamily: "'DM Serif Display', serif",
-                fontSize: "clamp(2.8rem, 5.5vw, 4.5rem)",
+                fontSize: "clamp(2.4rem, 5.5vw, 4.5rem)",
                 lineHeight: 1.1,
                 color: COLORS.white,
                 marginBottom: "1.5rem",
@@ -471,9 +549,8 @@ export default function NexoraPrime() {
 
             </div>
 
-            <div style={{ flex: "0 0 400px", display: "flex", justifyContent: "center", animation: "fadeUp 0.9s ease 0.35s both" }}>
-              <div style={{
-                width: 380,
+            <div style={{ flex: "0 0 400px", display: "flex", justifyContent: "center", maxWidth: "100%", animation: "fadeUp 0.9s ease 0.35s both" }}>
+              <div className="hero-side-card" style={{
                 borderRadius: "30px",
                 background: "rgba(255,255,255,0.04)",
                 border: "1px solid rgba(255,255,255,0.12)",
@@ -523,7 +600,7 @@ export default function NexoraPrime() {
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }}>
             <FadeIn>
-              <div style={{
+              <div className="about-card" style={{
                 borderRadius: 24, overflow: "hidden", position: "relative",
                 background: `linear-gradient(135deg, ${COLORS.darker} 0%, ${COLORS.primary} 100%)`,
                 padding: "3rem", minHeight: 380,
@@ -632,7 +709,7 @@ export default function NexoraPrime() {
             ))}
           </div>
           <FadeIn>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }}>
+            <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }}>
               {[
                 { icon: "🎯", title: "Outcome-Driven", desc: "We measure success by your business results — not compute hours or ticket counts." },
                 { icon: "🤝", title: "Long-Term Partnership", desc: "We stay with you post-launch. Our engagement model is designed for continuity, not handoffs." },
@@ -669,7 +746,7 @@ export default function NexoraPrime() {
           <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", alignItems: "start" }}>
             {/* Left — contact info */}
             <FadeIn>
-              <div style={{
+              <div className="contact-info-card" style={{
                 borderRadius: 24,
                 background: `linear-gradient(135deg, ${COLORS.darker}, ${COLORS.primary})`,
                 padding: "3rem", color: COLORS.white,
@@ -679,6 +756,7 @@ export default function NexoraPrime() {
                   Reach us directly by email. We typically respond within one business day and are happy to schedule a free discovery call.
                 </p>
                 <div
+                  className="contact-person-row"
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -689,6 +767,7 @@ export default function NexoraPrime() {
                   <img
                     src="/AI Enchanced.png"
                     alt="Dimitar Iliev"
+                    className="person-photo"
                     style={{
                       width: 100,
                       height: 100,
@@ -733,7 +812,7 @@ export default function NexoraPrime() {
 
             {/* Right — Formspree form */}
             <FadeIn delay={0.15}>
-              <div style={{ background: COLORS.ghost, borderRadius: 24, padding: "3rem" }}>
+              <div className="contact-form-card" style={{ background: COLORS.ghost, borderRadius: 24, padding: "3rem" }}>
                 <h3 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.4rem", color: COLORS.text, marginBottom: "0.5rem" }}>Start a project</h3>
                 <p style={{ color: COLORS.muted, fontSize: "0.88rem", marginBottom: "2rem" }}>Tell us about your project and we'll get back to you.</p>
 
@@ -820,11 +899,11 @@ export default function NexoraPrime() {
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div className="footer-grid" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <img src="/favicon.ico" alt="Nexora Prime" style={{ width: 100, height: 100, borderRadius: "10px", objectFit: "contain" }} />
+              <img src="/favicon.ico" alt="Nexora Prime" className="logo-mark" style={{ borderRadius: "10px", objectFit: "contain" }} />
               <span style={{ color: COLORS.white, fontWeight: 700 }}>Nexora<span style={{ fontFamily: "'DM Serif Display', serif", fontStyle: "italic", color: COLORS.pale }}>Prime</span></span>
             </div>
             <div>© {new Date().getFullYear()} Nexora Prime. All rights reserved.</div>
-            <div style={{ display: "flex", gap: "2rem" }}>
+            <div className="footer-links" style={{ display: "flex", gap: "2rem" }}>
               {NAV_LINKS.map((l) => (
                 <button key={l} onClick={() => scrollTo(l.toLowerCase().replace(" ", "-"))}
                   style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.45)", fontSize: "0.82rem", transition: "color 0.2s" }}
