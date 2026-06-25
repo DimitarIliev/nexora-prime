@@ -163,6 +163,66 @@ export default function NexoraPrime() {
         ::-webkit-scrollbar-track { background: ${COLORS.ghost}; }
         ::-webkit-scrollbar-thumb { background: ${COLORS.mid}; border-radius: 3px; }
 
+        .mobile-menu-btn {
+          display: none;
+        }
+
+        .nav-desktop {
+          display: flex;
+          gap: 2.5rem;
+          align-items: center;
+        }
+
+        .nav-mobile {
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          nav {
+            padding: 0 1rem !important;
+          }
+
+          .nav-desktop {
+            display: none !important;
+          }
+
+          .mobile-menu-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+          }
+
+          .nav-mobile {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            position: absolute;
+            top: 68px;
+            left: 0;
+            right: 0;
+            background: ${COLORS.darker};
+            padding: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+          }
+
+          .nav-mobile .nav-link {
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 0;
+          }
+
+          .nav-mobile .cta-btn {
+            width: 100%;
+            justify-content: center;
+            margin-top: 0.5rem;
+          }
+        }
+
         .nav-link {
           position: relative;
           cursor: pointer;
@@ -290,24 +350,60 @@ export default function NexoraPrime() {
       }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-            <img src="/Nexora Prime-Photoroom.png" alt="Nexora Prime" style={{ width: 100, height: 100, borderRadius: "10px", objectFit: "contain" }} />
+            <img src="/favicon.ico" alt="Nexora Prime" style={{ width: 100, height: 100, borderRadius: "10px", objectFit: "contain" }} />
             <span style={{ color: COLORS.white, fontWeight: 700, fontSize: "1.1rem", letterSpacing: "-0.01em" }}>
               Nexora<span style={{ color: COLORS.pale, fontFamily: "'DM Serif Display', serif", fontStyle: "italic" }}>Prime</span>
             </span>
           </div>
-          <div style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
-            {NAV_LINKS.map((link) => (
+          <>
+            <div className="nav-desktop">
+              {NAV_LINKS.map((link) => (
+                <button
+                  key={link}
+                  className={`nav-link${active === link ? " active" : ""}`}
+                  onClick={() => scrollTo(link.toLowerCase().replace(" ", "-"))}
+                >
+                  {link}
+                </button>
+              ))}
+
               <button
-                key={link}
-                className={`nav-link${active === link ? " active" : ""}`}
-                onClick={() => scrollTo(link.toLowerCase().replace(" ", "-"))}
-              >{link}</button>
-            ))}
-            <button className="cta-btn cta-primary" style={{ padding: "0.55rem 1.3rem", fontSize: "0.82rem" }}
-              onClick={() => scrollTo("contact")}>
-              Get in Touch →
+                className="cta-btn cta-primary"
+                style={{ padding: "0.55rem 1.3rem", fontSize: "0.82rem" }}
+                onClick={() => scrollTo("contact")}
+              >
+                Get in Touch →
+              </button>
+            </div>
+
+            <button
+              className="mobile-menu-btn"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              {menuOpen ? "✕" : "☰"}
             </button>
-          </div>
+
+            {menuOpen && (
+              <div className="nav-mobile">
+                {NAV_LINKS.map((link) => (
+                  <button
+                    key={link}
+                    className={`nav-link${active === link ? " active" : ""}`}
+                    onClick={() => scrollTo(link.toLowerCase().replace(" ", "-"))}
+                  >
+                    {link}
+                  </button>
+                ))}
+
+                <button
+                  className="cta-btn cta-primary"
+                  onClick={() => scrollTo("contact")}
+                >
+                  Get in Touch →
+                </button>
+              </div>
+            )}
+          </>
         </div>
       </nav>
 
@@ -582,22 +678,49 @@ export default function NexoraPrime() {
                 <p style={{ color: "rgba(255,255,255,0.7)", lineHeight: 1.7, marginBottom: "2.5rem", fontSize: "0.92rem" }}>
                   Reach us directly by email. We typically respond within one business day and are happy to schedule a free discovery call.
                 </p>
-                {[
-                  { icon: "✉️", label: "Personal email", value: "dimitar.iliev96@hotmail.com" },
-                  { icon: "🏢", label: "Company email", value: "nexora-ai@outlook.com" },
-                ].map(({ icon, label, value }) => (
-                  <div key={label} style={{ display: "flex", gap: "1rem", alignItems: "flex-start", marginBottom: "1.5rem" }}>
-                    <div style={{
-                      width: 44, height: 44, borderRadius: 12, flexShrink: 0,
-                      background: "rgba(255,255,255,0.1)",
-                      display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.2rem",
-                    }}>{icon}</div>
-                    <div>
-                      <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.72rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>{label}</div>
-                      <a href={`mailto:${value}`} style={{ color: COLORS.pale, fontWeight: 600, fontSize: "0.95rem", textDecoration: "none" }}>{value}</a>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "1.25rem",
+                    marginBottom: "2rem",
+                  }}
+                >
+                  <img
+                    src="/AI Enchanced.png"
+                    alt="Dimitar Iliev"
+                    style={{
+                      width: 100,
+                      height: 100,
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                      border: "3px solid rgba(255,255,255,0.15)",
+                    }}
+                  />
+
+                  <div>
+                    <div
+                      style={{
+                        color: COLORS.white,
+                        fontSize: "1.15rem",
+                        fontWeight: 700,
+                        marginBottom: 4,
+                      }}
+                    >
+                      Dimitar Iliev
+                    </div>
+
+                    <div
+                      style={{
+                        color: COLORS.pale,
+                        fontSize: "0.9rem",
+                        fontWeight: 600,
+                      }}
+                    >
+                      Founder & CEO
                     </div>
                   </div>
-                ))}
+                </div>
                 <div style={{ marginTop: "2.5rem", paddingTop: "2rem", borderTop: "1px solid rgba(255,255,255,0.12)" }}>
                   <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.72rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.75rem" }}>Response time</div>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -697,7 +820,7 @@ export default function NexoraPrime() {
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div className="footer-grid" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <img src="/Nexora Prime-Photoroom.png" alt="Nexora Prime" style={{ width: 100, height: 100, borderRadius: "10px", objectFit: "contain" }} />
+              <img src="/favicon.ico" alt="Nexora Prime" style={{ width: 100, height: 100, borderRadius: "10px", objectFit: "contain" }} />
               <span style={{ color: COLORS.white, fontWeight: 700 }}>Nexora<span style={{ fontFamily: "'DM Serif Display', serif", fontStyle: "italic", color: COLORS.pale }}>Prime</span></span>
             </div>
             <div>© {new Date().getFullYear()} Nexora Prime. All rights reserved.</div>
