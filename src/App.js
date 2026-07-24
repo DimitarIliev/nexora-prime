@@ -17,50 +17,102 @@ const COLORS = {
 
 const NAV_LINKS = ["About", "Services", "Why Us", "Contact"];
 
+/* ---------- Icons (line-style, palette-matched — replaces emoji) ---------- */
+
+const IconCloud = ({ size = 28, color = COLORS.primary }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M7 18h10a4 4 0 0 0 .5-7.97A5.5 5.5 0 0 0 7.14 8.1 4 4 0 0 0 7 18Z" />
+  </svg>
+);
+const IconChip = ({ size = 28, color = COLORS.primary }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="6" y="6" width="12" height="12" rx="2" />
+    <path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3" />
+  </svg>
+);
+const IconShield = ({ size = 28, color = COLORS.primary }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z" />
+  </svg>
+);
+const IconShieldCheck = ({ size = 28, color = COLORS.primary }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z" />
+    <path d="M9 12l2 2 4-4" />
+  </svg>
+);
+const IconBolt = ({ size = 28, color = COLORS.primary }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" />
+  </svg>
+);
+const IconChart = ({ size = 28, color = COLORS.primary }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 20V10M12 20V4M20 20v-7" />
+  </svg>
+);
+const IconTarget = ({ size = 26, color = COLORS.pale }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="0.6" fill={color} />
+  </svg>
+);
+const IconLayers = ({ size = 26, color = COLORS.pale }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 3 3 8l9 5 9-5-9-5Z" /><path d="M3 13l9 5 9-5" />
+  </svg>
+);
+const IconFlask = ({ size = 26, color = COLORS.pale }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 2h6M10 2v6l-5.5 9A2 2 0 0 0 6.2 20h11.6a2 2 0 0 0 1.7-3L14 8V2" />
+  </svg>
+);
+
 const SERVICES = [
   {
-    icon: "☁️",
+    icon: <IconCloud />,
     title: "Azure Cloud Architecture",
     desc: "Design and implement scalable, resilient cloud infrastructure tailored to your business. From lift-and-shift migrations to cloud-native greenfield builds.",
     tags: ["Azure Landing Zones", "Hybrid Cloud", "Cost Optimization"],
   },
   {
-    icon: "🤖",
+    icon: <IconChip />,
     title: "AI & Machine Learning",
-    desc: "Unlock the power of intelligent automation. We integrate Azure OpenAI, Cognitive Services, and custom ML pipelines into your existing workflows.",
-    tags: ["Azure OpenAI", "MLOps", "Copilot Studio"],
+    desc: "Unlock the power of intelligent automation. We integrate Microsoft Foundry, Cognitive Services, and custom ML pipelines into your existing workflows.",
+    tags: ["Microsoft Foundry", "MLOps", "Copilot Studio"],
   },
   {
-    icon: "🔒",
+    icon: <IconShield />,
     title: "Security & Compliance",
     desc: "Zero-trust architecture, identity governance, and compliance frameworks. Build on Azure with confidence — from Entra ID to Microsoft Defender.",
     tags: ["Zero Trust", "Entra ID", "Compliance"],
   },
   {
-    icon: "⚡",
+    icon: <IconBolt />,
     title: "DevOps & Automation",
     desc: "Streamline delivery with Azure DevOps, GitHub Actions, and Infrastructure as Code. Faster releases, fewer incidents, full auditability.",
     tags: ["CI/CD", "Terraform", "Azure DevOps"],
   },
   {
-    icon: "📊",
+    icon: <IconChart />,
     title: "Data & Analytics",
     desc: "Transform raw data into business intelligence with Azure Synapse, Fabric, and Power BI. Real-time dashboards and data lakehouse architectures.",
     tags: ["Azure Fabric", "Power BI", "Synapse"],
   },
   {
-    icon: "🛡️",
+    icon: <IconShieldCheck />,
     title: "Managed Services",
     desc: "Ongoing platform management, monitoring, and incident response. We become your extended cloud operations team — 24/7 peace of mind.",
     tags: ["Monitoring", "SLA Management", "FinOps"],
   },
 ];
 
+// Honest, verifiable-feeling differentiators rather than vague/inflated stats —
+// swap the label copy for whatever is actually true of your practice.
 const WHY_US = [
-  { num: "12+", label: "Years of Combined Cloud Experience" },
-  { num: "100%", label: "Focus on Azure & AI — Nothing Else" },
-  { num: "Fast", label: "From Discovery to First Deployment" },
-  { num: "∞", label: "Curiosity for What's Next in AI" },
+  { num: "1:1", label: "Direct access to the person designing your system" },
+  { num: "Fixed", label: "Scope and price agreed upfront, before work begins" },
+  { num: "Fast", label: "From discovery call to first deployment" },
+  { num: "Azure", label: "Certified architecture, grounded in Microsoft's own frameworks" },
 ];
 
 function useScrollSpy() {
@@ -95,6 +147,18 @@ function useInView(ref) {
   return visible;
 }
 
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mq.matches);
+    const handler = () => setReduced(mq.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+  return reduced;
+}
+
 function FadeIn({ children, delay = 0, style = {} }) {
   const ref = useRef(null);
   const visible = useInView(ref);
@@ -113,10 +177,41 @@ function FadeIn({ children, delay = 0, style = {} }) {
   );
 }
 
+// Signature element: a small animated request-flow diagram standing in for the
+// "what we actually build" moment, instead of a generic feature-icon list.
+function ArchitectureDiagram({ reducedMotion }) {
+  const nodes = [
+    { x: 24, label: "Client" },
+    { x: 128, label: "Service" },
+    { x: 232, label: "Microsoft Foundry" },
+    { x: 336, label: "Data" },
+  ];
+  return (
+    <svg viewBox="0 0 360 130" width="100%" height="130" style={{ overflow: "visible" }} role="img" aria-label="Diagram of a client request flowing through Service, Microsoft Foundry, and a data store">
+      <line x1="24" y1="60" x2="336" y2="60" stroke={COLORS.light} strokeOpacity="0.35" strokeWidth="1.5" />
+      {!reducedMotion && (
+        <circle r="3.5" fill={COLORS.pale}>
+          <animateMotion dur="3.2s" repeatCount="indefinite" path="M24,60 L336,60" />
+        </circle>
+      )}
+      {nodes.map((n) => (
+        <g key={n.label}>
+          <circle cx={n.x} cy="60" r="9" fill={COLORS.dark} stroke={COLORS.light} strokeWidth="1.5" />
+          <text x={n.x} y="92" textAnchor="middle" fontSize="10.5" fill="rgba(255,255,255,0.62)" fontFamily="'Sora', sans-serif">
+            {n.label}
+          </text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
 export default function NexoraPrime() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const active = useScrollSpy();
+  const reducedMotion = usePrefersReducedMotion();
+  const navRef = useRef(null);
   const [formData, setFormData] = useState({ name: "", email: "", company: "", message: "" });
   const [formStatus, setFormStatus] = useState("idle"); // idle | sending | success | error
 
@@ -146,6 +241,23 @@ export default function NexoraPrime() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  // Close the mobile menu on outside click or Escape.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleClick = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) setMenuOpen(false);
+    };
+    const handleKey = (e) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("mousedown", handleClick);
+    document.addEventListener("keydown", handleKey);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("keydown", handleKey);
+    };
+  }, [menuOpen]);
+
   const scrollTo = (id) => {
     setMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -162,6 +274,23 @@ export default function NexoraPrime() {
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: ${COLORS.ghost}; }
         ::-webkit-scrollbar-thumb { background: ${COLORS.mid}; border-radius: 3px; }
+
+        /* Accessibility: visible keyboard focus everywhere */
+        button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+          outline: 2px solid ${COLORS.mid};
+          outline-offset: 3px;
+          border-radius: 4px;
+        }
+
+        /* Respect reduced-motion preference */
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+          }
+        }
 
         .mobile-menu-btn {
           display: none;
@@ -418,14 +547,17 @@ export default function NexoraPrime() {
       `}</style>
 
       {/* NAV */}
-      <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: scrolled ? COLORS.darker : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        transition: "background 0.4s, box-shadow 0.4s",
-        boxShadow: scrolled ? "0 2px 30px rgba(0,0,0,0.25)" : "none",
-        padding: "0 2rem",
-      }}>
+      <nav
+        ref={navRef}
+        style={{
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+          background: scrolled ? COLORS.darker : "transparent",
+          backdropFilter: scrolled ? "blur(12px)" : "none",
+          transition: "background 0.4s, box-shadow 0.4s",
+          boxShadow: scrolled ? "0 2px 30px rgba(0,0,0,0.25)" : "none",
+          padding: "0 2rem",
+        }}
+      >
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             <img src="/favicon.ico" alt="Nexora Prime" className="logo-mark" style={{ borderRadius: "10px", objectFit: "contain" }} />
@@ -456,6 +588,8 @@ export default function NexoraPrime() {
 
             <button
               className="mobile-menu-btn"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
               onClick={() => setMenuOpen(!menuOpen)}
             >
               {menuOpen ? "✕" : "☰"}
@@ -531,8 +665,8 @@ export default function NexoraPrime() {
                 marginBottom: "1.5rem",
                 animation: "fadeUp 0.9s ease 0.1s both",
               }}>
-                Cloud Intelligence<br />
-                <span style={{ color: COLORS.pale, fontStyle: "italic" }}>Built for Scale</span>
+                Azure Architecture,<br />
+                <span style={{ color: COLORS.pale, fontStyle: "italic" }}>Built to Ship</span>
               </h1>
               <p style={{
                 color: "rgba(255,255,255,0.72)",
@@ -540,7 +674,7 @@ export default function NexoraPrime() {
                 marginBottom: "2.5rem",
                 animation: "fadeUp 0.9s ease 0.2s both",
               }}>
-                Nexora Prime helps businesses harness the full potential of Microsoft Azure and artificial intelligence — from architecture design to production deployment and beyond.
+                We design and deploy Azure infrastructure and applied AI systems for teams who need a working system in production — not another slide deck. From landing zone to Microsoft Foundry integration, one team sees it through.
               </p>
               <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", animation: "fadeUp 0.9s ease 0.3s both" }}>
                 <button className="cta-btn cta-primary" onClick={() => scrollTo("services")}>Explore Services →</button>
@@ -560,26 +694,13 @@ export default function NexoraPrime() {
                 position: "relative", overflow: "hidden",
               }}>
                 <div style={{ position: "absolute", top: -60, right: -60, width: 200, height: 200, borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.light}22 0%, transparent 70%)` }} />
-                <div style={{ fontSize: "0.7rem", color: COLORS.pale, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "0.5rem" }}>What we bring to the table</div>
-                {[
-                  { icon: "☁️", title: "Azure Architecture", desc: "Cloud-native solutions designed to scale with your ambitions." },
-                  { icon: "🤖", title: "AI Integration", desc: "Practical AI that solves real problems, not demos." },
-                  { icon: "⚡", title: "Fast Delivery", desc: "From first call to first deployment — no long runways." },
-                  { icon: "🤝", title: "Honest Advice", desc: "We tell you what you need, not what costs the most." },
-                ].map(({ icon, title, desc }) => (
-                  <div key={title} style={{
-                    display: "flex", gap: "0.85rem", alignItems: "flex-start",
-                    padding: "0.85rem", borderRadius: 12,
-                    background: "rgba(255,255,255,0.05)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                  }}>
-                    <span style={{ fontSize: "1.3rem", flexShrink: 0, marginTop: 2 }}>{icon}</span>
-                    <div>
-                      <div style={{ color: COLORS.white, fontWeight: 600, fontSize: "0.88rem", marginBottom: 3 }}>{title}</div>
-                      <div style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.78rem", lineHeight: 1.5 }}>{desc}</div>
-                    </div>
-                  </div>
-                ))}
+                <div style={{ fontSize: "0.7rem", color: COLORS.pale, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                  A typical Nexora Prime deployment
+                </div>
+                <ArchitectureDiagram reducedMotion={reducedMotion} />
+                <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.82rem", lineHeight: 1.6 }}>
+                  A client request flows through your app tier into Microsoft Foundry and back to storage — the same pattern we design, secure, and operate for clients.
+                </p>
               </div>
             </div>
           </div>
@@ -615,7 +736,9 @@ export default function NexoraPrime() {
                     }} />
                   ))}
                 </div>
-                <div style={{ fontSize: "3.5rem", marginBottom: "1rem" }}>🌐</div>
+                <div style={{ marginBottom: "1rem" }}>
+                  <IconCloud size={44} color={COLORS.pale} />
+                </div>
                 <h3 style={{ color: COLORS.white, fontFamily: "'DM Serif Display', serif", fontSize: "1.8rem", lineHeight: 1.2, marginBottom: "0.75rem" }}>
                   Your trusted partner<br /><em>in the cloud era</em>
                 </h3>
@@ -629,13 +752,13 @@ export default function NexoraPrime() {
               <div>
                 <div style={{ color: COLORS.primary, fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>About Nexora Prime</div>
                 <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", lineHeight: 1.15, marginBottom: "1.5rem", color: COLORS.text }}>
-                  We speak<br /><span style={{ color: COLORS.primary }}>cloud fluently</span>
+                  Built for<br /><span style={{ color: COLORS.primary }}>production, not proposals</span>
                 </h2>
                 <p style={{ color: COLORS.muted, lineHeight: 1.8, marginBottom: "1.2rem", fontSize: "0.97rem" }}>
-                  Nexora Prime is a specialist Azure and AI consulting firm. We help organizations design, build, and operate cloud solutions that are secure, intelligent, and built to grow with you.
+                  Nexora Prime is a specialist Azure and AI consulting practice. We help organizations design, build, and operate cloud solutions that are secure, intelligent, and built to grow with you.
                 </p>
                 <p style={{ color: COLORS.muted, lineHeight: 1.8, marginBottom: "2rem", fontSize: "0.97rem" }}>
-                  Our team combines deep Microsoft expertise with real-world engineering experience. We've delivered solutions across finance, healthcare, and retail — each one grounded in your business goals, not just technical specs.
+                  Every engagement is grounded in deep Microsoft expertise and real-world engineering practice — architecture decisions are made with your business goals in view, not just the technical spec sheet.
                 </p>
                 <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
                   {["Azure Certified", "AI-First Approach", "Agile Delivery"].map((item) => (
@@ -658,7 +781,7 @@ export default function NexoraPrime() {
             <div style={{ textAlign: "center", marginBottom: "4rem" }}>
               <div style={{ color: COLORS.primary, fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>What We Do</div>
               <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: COLORS.text, lineHeight: 1.2, marginBottom: "1rem" }}>
-                Full-spectrum<br /><span style={{ color: COLORS.primary }}>Azure & AI services</span>
+                Every layer of<br /><span style={{ color: COLORS.primary }}>the Azure stack</span>
               </h2>
               <p style={{ color: COLORS.muted, maxWidth: 540, margin: "0 auto", lineHeight: 1.7, fontSize: "0.97rem" }}>
                 From initial strategy to production operations, we cover every layer of your cloud journey.
@@ -669,7 +792,7 @@ export default function NexoraPrime() {
             {SERVICES.map((s, i) => (
               <FadeIn key={s.title} delay={i * 0.08}>
                 <div className="service-card">
-                  <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>{s.icon}</div>
+                  <div style={{ marginBottom: "1rem" }}>{s.icon}</div>
                   <h3 style={{ fontSize: "1.05rem", fontWeight: 700, marginBottom: "0.75rem", color: COLORS.text }}>{s.title}</h3>
                   <p style={{ color: COLORS.muted, fontSize: "0.88rem", lineHeight: 1.7, marginBottom: "1.25rem" }}>{s.desc}</p>
 
@@ -694,7 +817,7 @@ export default function NexoraPrime() {
             <div style={{ textAlign: "center", marginBottom: "4rem" }}>
               <div style={{ color: COLORS.pale, fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>Why Nexora Prime</div>
               <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: COLORS.white, lineHeight: 1.2 }}>
-                Numbers that speak<br /><em style={{ color: COLORS.pale }}>for themselves</em>
+                What working with us<br /><em style={{ color: COLORS.pale }}>looks like</em>
               </h2>
             </div>
           </FadeIn>
@@ -702,7 +825,7 @@ export default function NexoraPrime() {
             {WHY_US.map((s, i) => (
               <FadeIn key={s.num} delay={i * 0.1}>
                 <div className="stat-card">
-                  <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: "3.2rem", color: COLORS.pale, lineHeight: 1, marginBottom: "0.5rem" }}>{s.num}</div>
+                  <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: "2.6rem", color: COLORS.pale, lineHeight: 1, marginBottom: "0.75rem" }}>{s.num}</div>
                   <div style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.88rem", lineHeight: 1.4 }}>{s.label}</div>
                 </div>
               </FadeIn>
@@ -711,13 +834,13 @@ export default function NexoraPrime() {
           <FadeIn>
             <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }}>
               {[
-                { icon: "🎯", title: "Outcome-Driven", desc: "We measure success by your business results — not compute hours or ticket counts." },
-                { icon: "🤝", title: "Long-Term Partnership", desc: "We stay with you post-launch. Our engagement model is designed for continuity, not handoffs." },
-                { icon: "🧪", title: "Continuous Innovation", desc: "We stay at the frontier of Azure and AI so you benefit from what's new — without the risk." },
+                { icon: <IconTarget />, title: "Outcome-Driven", desc: "We measure success by your business results — not compute hours or ticket counts." },
+                { icon: <IconLayers />, title: "Long-Term Partnership", desc: "We stay with you post-launch. Our engagement model is designed for continuity, not handoffs." },
+                { icon: <IconFlask />, title: "Continuous Innovation", desc: "We stay at the frontier of Azure and AI so you benefit from what's new — without the risk." },
               ].map((p, i) => (
                 <FadeIn key={p.title} delay={0.1 + i * 0.1}>
                   <div style={{ padding: "2rem", borderRadius: 16, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                    <div style={{ fontSize: "1.8rem", marginBottom: "0.75rem" }}>{p.icon}</div>
+                    <div style={{ marginBottom: "0.75rem" }}>{p.icon}</div>
                     <h4 style={{ color: COLORS.white, fontWeight: 700, marginBottom: "0.5rem", fontSize: "1rem" }}>{p.title}</h4>
                     <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.87rem", lineHeight: 1.6 }}>{p.desc}</p>
                   </div>
@@ -818,7 +941,9 @@ export default function NexoraPrime() {
 
                 {formStatus === "success" ? (
                   <div style={{ textAlign: "center", padding: "3rem 1rem" }}>
-                    <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>✅</div>
+                    <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "center" }}>
+                      <IconShieldCheck size={44} color={COLORS.primary} />
+                    </div>
                     <h4 style={{ color: COLORS.text, marginBottom: "0.5rem", fontSize: "1.1rem" }}>Message sent!</h4>
                     <p style={{ color: COLORS.muted, fontSize: "0.88rem" }}>We'll get back to you within 24 hours.</p>
                     <button
