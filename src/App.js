@@ -635,7 +635,7 @@ export default function NexoraPrime() {
                   Nexora Prime is a specialist Azure and AI consulting firm. We help organizations design, build, and operate cloud solutions that are secure, intelligent, and built to grow with you.
                 </p>
                 <p style={{ color: COLORS.muted, lineHeight: 1.8, marginBottom: "2rem", fontSize: "0.97rem" }}>
-                  Our team combines deep Microsoft expertise with real-world engineering experience. We've delivered solutions across finance, healthcare, retail, and the public sector — each one grounded in your business goals, not just technical specs.
+                  Our team combines deep Microsoft expertise with real-world engineering experience. We've delivered solutions across finance, healthcare, and retail — each one grounded in your business goals, not just technical specs.
                 </p>
                 <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
                   {["Azure Certified", "AI-First Approach", "Agile Delivery"].map((item) => (
