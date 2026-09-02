@@ -206,6 +206,160 @@ function ArchitectureDiagram({ reducedMotion }) {
   );
 }
 
+
+function SEO() {
+  useEffect(() => {
+    const title = "Azure AI Consulting & Cloud Architecture | Nexora Prime";
+    const description =
+      "Nexora Prime provides Azure AI consulting, cloud architecture, AI agent development, Microsoft Foundry, DevOps, security, and data solutions for businesses.";
+    const canonicalUrl = "https://nexoraprime.cloud/";
+    const imageUrl = "https://nexoraprime.cloud/favicon.ico";
+
+    document.title = title;
+
+    const setMeta = (selector, attributes) => {
+      let element = document.head.querySelector(selector);
+      if (!element) {
+        element = document.createElement("meta");
+        document.head.appendChild(element);
+      }
+      Object.entries(attributes).forEach(([key, value]) => {
+        element.setAttribute(key, value);
+      });
+    };
+
+    const setLink = (selector, attributes) => {
+      let element = document.head.querySelector(selector);
+      if (!element) {
+        element = document.createElement("link");
+        document.head.appendChild(element);
+      }
+      Object.entries(attributes).forEach(([key, value]) => {
+        element.setAttribute(key, value);
+      });
+    };
+
+    setMeta('meta[name="description"]', {
+      name: "description",
+      content: description,
+    });
+
+    setMeta('meta[name="robots"]', {
+      name: "robots",
+      content: "index, follow",
+    });
+
+    setMeta('meta[name="author"]', {
+      name: "author",
+      content: "Nexora Prime",
+    });
+
+    setMeta('meta[name="theme-color"]', {
+      name: "theme-color",
+      content: "#153f40",
+    });
+
+    // Open Graph
+    setMeta('meta[property="og:type"]', {
+      property: "og:type",
+      content: "website",
+    });
+
+    setMeta('meta[property="og:title"]', {
+      property: "og:title",
+      content: title,
+    });
+
+    setMeta('meta[property="og:description"]', {
+      property: "og:description",
+      content: description,
+    });
+
+    setMeta('meta[property="og:url"]', {
+      property: "og:url",
+      content: canonicalUrl,
+    });
+
+    setMeta('meta[property="og:site_name"]', {
+      property: "og:site_name",
+      content: "Nexora Prime",
+    });
+
+    setMeta('meta[property="og:image"]', {
+      property: "og:image",
+      content: imageUrl,
+    });
+
+    // Twitter / social sharing
+    setMeta('meta[name="twitter:card"]', {
+      name: "twitter:card",
+      content: "summary",
+    });
+
+    setMeta('meta[name="twitter:title"]', {
+      name: "twitter:title",
+      content: title,
+    });
+
+    setMeta('meta[name="twitter:description"]', {
+      name: "twitter:description",
+      content: description,
+    });
+
+    setMeta('meta[name="twitter:image"]', {
+      name: "twitter:image",
+      content: imageUrl,
+    });
+
+    setLink('link[rel="canonical"]', {
+      rel: "canonical",
+      href: canonicalUrl,
+    });
+
+    // Organization structured data helps search engines understand the business.
+    const structuredDataId = "nexora-prime-organization-schema";
+    let structuredData = document.getElementById(structuredDataId);
+
+    if (!structuredData) {
+      structuredData = document.createElement("script");
+      structuredData.id = structuredDataId;
+      structuredData.type = "application/ld+json";
+      document.head.appendChild(structuredData);
+    }
+
+    structuredData.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Nexora Prime",
+      url: canonicalUrl,
+      logo: imageUrl,
+      description:
+        "Azure and AI consulting practice providing cloud architecture, applied AI, Microsoft Foundry, DevOps, security, and data solutions.",
+      founder: {
+        "@type": "Person",
+        name: "Dimitar Iliev",
+      },
+      knowsAbout: [
+        "Microsoft Azure",
+        "Azure AI",
+        "Azure Cloud Architecture",
+        "Azure OpenAI",
+        "Microsoft Foundry",
+        "AI Agents",
+        "Azure DevOps",
+        "Cloud Security",
+        "Data Analytics",
+      ],
+    });
+
+    return () => {
+      // Keep the metadata in place for SPA navigation and search/social crawlers.
+    };
+  }, []);
+
+  return null;
+}
+
 export default function NexoraPrime() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -264,8 +418,10 @@ export default function NexoraPrime() {
   };
 
   return (
-    <div style={{ fontFamily: "'Sora', sans-serif", background: COLORS.white, color: COLORS.text, overflowX: "hidden" }}>
-      <style>{`
+    <>
+      <SEO />
+      <div style={{ fontFamily: "'Sora', sans-serif", background: COLORS.white, color: COLORS.text, overflowX: "hidden" }}>
+        <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
@@ -546,57 +702,27 @@ export default function NexoraPrime() {
         }
       `}</style>
 
-      {/* NAV */}
-      <nav
-        ref={navRef}
-        style={{
-          position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-          background: scrolled ? COLORS.darker : "transparent",
-          backdropFilter: scrolled ? "blur(12px)" : "none",
-          transition: "background 0.4s, box-shadow 0.4s",
-          boxShadow: scrolled ? "0 2px 30px rgba(0,0,0,0.25)" : "none",
-          padding: "0 2rem",
-        }}
-      >
-        <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer" }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-            <img src="/favicon.ico" alt="Nexora Prime" className="logo-mark" style={{ borderRadius: "10px", objectFit: "contain" }} />
-            <span style={{ color: COLORS.white, fontWeight: 700, fontSize: "1.1rem", letterSpacing: "-0.01em" }}>
-              Nexora<span style={{ color: COLORS.pale, fontFamily: "'DM Serif Display', serif", fontStyle: "italic" }}>Prime</span>
-            </span>
-          </div>
-          <>
-            <div className="nav-desktop">
-              {NAV_LINKS.map((link) => (
-                <button
-                  key={link}
-                  className={`nav-link${active === link ? " active" : ""}`}
-                  onClick={() => scrollTo(link.toLowerCase().replace(" ", "-"))}
-                >
-                  {link}
-                </button>
-              ))}
-
-              <button
-                className="cta-btn cta-primary"
-                style={{ padding: "0.55rem 1.3rem", fontSize: "0.82rem" }}
-                onClick={() => scrollTo("contact")}
-              >
-                Get in Touch →
-              </button>
-            </div>
-
-            <button
-              className="mobile-menu-btn"
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              {menuOpen ? "✕" : "☰"}
+        {/* NAV */}
+        <nav
+          ref={navRef}
+          style={{
+            position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+            background: scrolled ? COLORS.darker : "transparent",
+            backdropFilter: scrolled ? "blur(12px)" : "none",
+            transition: "background 0.4s, box-shadow 0.4s",
+            boxShadow: scrolled ? "0 2px 30px rgba(0,0,0,0.25)" : "none",
+            padding: "0 2rem",
+          }}
+        >
+          <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
+            <button aria-label="Go to the Nexora Prime homepage" style={{ display: "flex", alignItems: "center", gap: "10px", cursor: "pointer", background: "none", border: "none", padding: 0 }} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+              <img src="/favicon.ico" alt="Nexora Prime" className="logo-mark" style={{ borderRadius: "10px", objectFit: "contain" }} />
+              <span style={{ color: COLORS.white, fontWeight: 700, fontSize: "1.1rem", letterSpacing: "-0.01em" }}>
+                Nexora<span style={{ color: COLORS.pale, fontFamily: "'DM Serif Display', serif", fontStyle: "italic" }}>Prime</span>
+              </span>
             </button>
-
-            {menuOpen && (
-              <div className="nav-mobile">
+            <>
+              <div className="nav-desktop">
                 {NAV_LINKS.map((link) => (
                   <button
                     key={link}
@@ -609,437 +735,472 @@ export default function NexoraPrime() {
 
                 <button
                   className="cta-btn cta-primary"
+                  style={{ padding: "0.55rem 1.3rem", fontSize: "0.82rem" }}
                   onClick={() => scrollTo("contact")}
                 >
                   Get in Touch →
                 </button>
               </div>
-            )}
-          </>
-        </div>
-      </nav>
 
-      {/* HERO */}
-      <section style={{
-        minHeight: "100vh",
-        background: `linear-gradient(150deg, ${COLORS.darker} 0%, ${COLORS.dark} 40%, ${COLORS.primary} 100%)`,
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        overflow: "hidden",
-        padding: "0 2rem",
-      }}>
-        <div style={{ position: "absolute", inset: 0, opacity: 0.06 }}>
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="1" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
-        </div>
-        <div style={{ position: "absolute", top: "10%", right: "5%", width: 500, height: 500, borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.mid}44 0%, transparent 70%)`, pointerEvents: "none" }} />
-        <div style={{ position: "absolute", bottom: "-10%", left: "-5%", width: 400, height: 400, borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.dark}88 0%, transparent 70%)`, pointerEvents: "none" }} />
+              <button
+                className="mobile-menu-btn"
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={menuOpen}
+                onClick={() => setMenuOpen(!menuOpen)}
+              >
+                {menuOpen ? "✕" : "☰"}
+              </button>
 
-        <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%", paddingTop: "6rem", paddingBottom: "4rem" }}>
-          <div className="hero-grid" style={{ display: "flex", alignItems: "center", gap: "4rem" }}>
-            <div style={{ flex: 1 }}>
-              <div style={{
-                display: "inline-block",
-                background: "rgba(255,255,255,0.1)",
-                border: "1px solid rgba(255,255,255,0.2)",
-                borderRadius: 50, padding: "6px 16px",
-                color: COLORS.pale, fontSize: "0.78rem",
-                fontWeight: 600, letterSpacing: "0.08em",
-                textTransform: "uppercase", marginBottom: "1.5rem",
-                animation: "fadeUp 0.8s ease both",
-              }}>
-                ✦ Azure & AI Consulting
-              </div>
-              <h1 style={{
-                fontFamily: "'DM Serif Display', serif",
-                fontSize: "clamp(2.4rem, 5.5vw, 4.5rem)",
-                lineHeight: 1.1,
-                color: COLORS.white,
-                marginBottom: "1.5rem",
-                animation: "fadeUp 0.9s ease 0.1s both",
-              }}>
-                Azure Architecture,<br />
-                <span style={{ color: COLORS.pale, fontStyle: "italic" }}>Built to Ship</span>
-              </h1>
-              <p style={{
-                color: "rgba(255,255,255,0.72)",
-                fontSize: "1.1rem", lineHeight: 1.7, maxWidth: 520,
-                marginBottom: "2.5rem",
-                animation: "fadeUp 0.9s ease 0.2s both",
-              }}>
-                We design and deploy Azure infrastructure and applied AI systems for teams who need a working system in production — not another slide deck. From landing zone to Microsoft Foundry integration, one team sees it through.
-              </p>
-              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", animation: "fadeUp 0.9s ease 0.3s both" }}>
-                <button className="cta-btn cta-primary" onClick={() => scrollTo("services")}>Explore Services →</button>
-                <button className="cta-btn cta-outline" onClick={() => scrollTo("contact")}>Talk to Us</button>
-              </div>
+              {menuOpen && (
+                <div className="nav-mobile">
+                  {NAV_LINKS.map((link) => (
+                    <button
+                      key={link}
+                      className={`nav-link${active === link ? " active" : ""}`}
+                      onClick={() => scrollTo(link.toLowerCase().replace(" ", "-"))}
+                    >
+                      {link}
+                    </button>
+                  ))}
 
-            </div>
-
-            <div style={{ flex: "0 0 400px", display: "flex", justifyContent: "center", maxWidth: "100%", animation: "fadeUp 0.9s ease 0.35s both" }}>
-              <div className="hero-side-card" style={{
-                borderRadius: "30px",
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.12)",
-                backdropFilter: "blur(16px)",
-                padding: "2.5rem",
-                display: "flex", flexDirection: "column", gap: "1rem",
-                position: "relative", overflow: "hidden",
-              }}>
-                <div style={{ position: "absolute", top: -60, right: -60, width: 200, height: 200, borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.light}22 0%, transparent 70%)` }} />
-                <div style={{ fontSize: "0.7rem", color: COLORS.pale, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                  A typical Nexora Prime deployment
+                  <button
+                    className="cta-btn cta-primary"
+                    onClick={() => scrollTo("contact")}
+                  >
+                    Get in Touch →
+                  </button>
                 </div>
-                <ArchitectureDiagram reducedMotion={reducedMotion} />
-                <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.82rem", lineHeight: 1.6 }}>
-                  A client request flows through your app tier into Microsoft Foundry and back to storage — the same pattern we design, secure, and operate for clients.
+              )}
+            </>
+          </div>
+        </nav>
+
+        {/* HERO */}
+        <section style={{
+          minHeight: "100vh",
+          background: `linear-gradient(150deg, ${COLORS.darker} 0%, ${COLORS.dark} 40%, ${COLORS.primary} 100%)`,
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          overflow: "hidden",
+          padding: "0 2rem",
+        }}>
+          <div style={{ position: "absolute", inset: 0, opacity: 0.06 }}>
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+                  <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="1" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+          </div>
+          <div style={{ position: "absolute", top: "10%", right: "5%", width: 500, height: 500, borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.mid}44 0%, transparent 70%)`, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", bottom: "-10%", left: "-5%", width: 400, height: 400, borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.dark}88 0%, transparent 70%)`, pointerEvents: "none" }} />
+
+          <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%", paddingTop: "6rem", paddingBottom: "4rem" }}>
+            <div className="hero-grid" style={{ display: "flex", alignItems: "center", gap: "4rem" }}>
+              <div style={{ flex: 1 }}>
+                <div style={{
+                  display: "inline-block",
+                  background: "rgba(255,255,255,0.1)",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                  borderRadius: 50, padding: "6px 16px",
+                  color: COLORS.pale, fontSize: "0.78rem",
+                  fontWeight: 600, letterSpacing: "0.08em",
+                  textTransform: "uppercase", marginBottom: "1.5rem",
+                  animation: "fadeUp 0.8s ease both",
+                }}>
+                  ✦ Azure & AI Consulting
+                </div>
+                <h1 style={{
+                  fontFamily: "'DM Serif Display', serif",
+                  fontSize: "clamp(2.4rem, 5.5vw, 4.5rem)",
+                  lineHeight: 1.1,
+                  color: COLORS.white,
+                  marginBottom: "1.5rem",
+                  animation: "fadeUp 0.9s ease 0.1s both",
+                }}>
+                  Azure Architecture,<br />
+                  <span style={{ color: COLORS.pale, fontStyle: "italic" }}>Built to Ship</span>
+                </h1>
+                <p style={{
+                  color: "rgba(255,255,255,0.72)",
+                  fontSize: "1.1rem", lineHeight: 1.7, maxWidth: 520,
+                  marginBottom: "2.5rem",
+                  animation: "fadeUp 0.9s ease 0.2s both",
+                }}>
+                  We design and deploy Azure infrastructure and applied AI systems for teams who need a working system in production — not another slide deck. From landing zone to Microsoft Foundry integration, one team sees it through.
                 </p>
+                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", animation: "fadeUp 0.9s ease 0.3s both" }}>
+                  <button className="cta-btn cta-primary" onClick={() => scrollTo("services")}>Explore Services →</button>
+                  <button className="cta-btn cta-outline" onClick={() => scrollTo("contact")}>Talk to Us</button>
+                </div>
+
+              </div>
+
+              <div style={{ flex: "0 0 400px", display: "flex", justifyContent: "center", maxWidth: "100%", animation: "fadeUp 0.9s ease 0.35s both" }}>
+                <div className="hero-side-card" style={{
+                  borderRadius: "30px",
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  backdropFilter: "blur(16px)",
+                  padding: "2.5rem",
+                  display: "flex", flexDirection: "column", gap: "1rem",
+                  position: "relative", overflow: "hidden",
+                }}>
+                  <div style={{ position: "absolute", top: -60, right: -60, width: 200, height: 200, borderRadius: "50%", background: `radial-gradient(circle, ${COLORS.light}22 0%, transparent 70%)` }} />
+                  <div style={{ fontSize: "0.7rem", color: COLORS.pale, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                    A typical Nexora Prime deployment
+                  </div>
+                  <ArchitectureDiagram reducedMotion={reducedMotion} />
+                  <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.82rem", lineHeight: 1.6 }}>
+                    A client request flows through your app tier into Microsoft Foundry and back to storage — the same pattern we design, secure, and operate for clients.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div style={{ position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 6, opacity: 0.5, animation: "bounce 2s infinite" }}>
-          <div style={{ width: 1, height: 40, background: "white" }} />
-          <span style={{ color: "white", fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>Scroll</span>
-        </div>
-        <style>{`
+          <div style={{ position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 6, opacity: 0.5, animation: "bounce 2s infinite" }}>
+            <div style={{ width: 1, height: 40, background: "white" }} />
+            <span style={{ color: "white", fontSize: "0.65rem", letterSpacing: "0.15em", textTransform: "uppercase" }}>Scroll</span>
+          </div>
+          <style>{`
           @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:none; } }
           @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-8px)} }
         `}</style>
-      </section>
+        </section>
 
-      {/* ABOUT */}
-      <section id="about" style={{ padding: "7rem 2rem", background: COLORS.white }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }}>
+        {/* ABOUT */}
+        <section id="about" style={{ padding: "7rem 2rem", background: COLORS.white }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }}>
+              <FadeIn>
+                <div className="about-card" style={{
+                  borderRadius: 24, overflow: "hidden", position: "relative",
+                  background: `linear-gradient(135deg, ${COLORS.darker} 0%, ${COLORS.primary} 100%)`,
+                  padding: "3rem", minHeight: 380,
+                  display: "flex", flexDirection: "column", justifyContent: "flex-end",
+                }}>
+                  <div style={{ position: "absolute", top: 30, right: 30 }}>
+                    {[80, 56, 32].map((s, i) => (
+                      <div key={i} style={{
+                        position: "absolute", width: s, height: s, borderRadius: "50%",
+                        border: `1px solid rgba(255,255,255,${0.08 + i * 0.06})`,
+                        top: -s / 2, right: -s / 2,
+                      }} />
+                    ))}
+                  </div>
+                  <div style={{ marginBottom: "1rem" }}>
+                    <IconCloud size={44} color={COLORS.pale} />
+                  </div>
+                  <h3 style={{ color: COLORS.white, fontFamily: "'DM Serif Display', serif", fontSize: "1.8rem", lineHeight: 1.2, marginBottom: "0.75rem" }}>
+                    Your trusted partner<br /><em>in the cloud era</em>
+                  </h3>
+                  <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.9rem", lineHeight: 1.6 }}>
+                    Founded on the belief that technology should accelerate your vision, not complicate it.
+                  </p>
+                </div>
+              </FadeIn>
+
+              <FadeIn delay={0.15}>
+                <div>
+                  <div style={{ color: COLORS.primary, fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>About Nexora Prime</div>
+                  <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", lineHeight: 1.15, marginBottom: "1.5rem", color: COLORS.text }}>
+                    Built for<br /><span style={{ color: COLORS.primary }}>production, not proposals</span>
+                  </h2>
+                  <p style={{ color: COLORS.muted, lineHeight: 1.8, marginBottom: "1.2rem", fontSize: "0.97rem" }}>
+                    Nexora Prime is a specialist Azure and AI consulting practice. We help organizations design, build, and operate cloud solutions that are secure, intelligent, and built to grow with you.
+                  </p>
+                  <p style={{ color: COLORS.muted, lineHeight: 1.8, marginBottom: "2rem", fontSize: "0.97rem" }}>
+                    Every engagement is grounded in deep Microsoft expertise and real-world engineering practice — architecture decisions are made with your business goals in view, not just the technical spec sheet.
+                  </p>
+                  <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
+                    {["Azure Certified", "AI-First Approach", "Agile Delivery"].map((item) => (
+                      <div key={item} style={{ display: "flex", alignItems: "center", gap: 8, color: COLORS.text, fontSize: "0.88rem", fontWeight: 500 }}>
+                        <span style={{ width: 22, height: 22, borderRadius: "50%", background: COLORS.ghost, display: "flex", alignItems: "center", justifyContent: "center", color: COLORS.primary, fontSize: "0.7rem", fontWeight: 700 }}>✓</span>
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </FadeIn>
+            </div>
+          </div>
+        </section>
+
+        {/* SERVICES */}
+        <section id="services" style={{ padding: "7rem 2rem", background: COLORS.ghost }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <FadeIn>
-              <div className="about-card" style={{
-                borderRadius: 24, overflow: "hidden", position: "relative",
-                background: `linear-gradient(135deg, ${COLORS.darker} 0%, ${COLORS.primary} 100%)`,
-                padding: "3rem", minHeight: 380,
-                display: "flex", flexDirection: "column", justifyContent: "flex-end",
-              }}>
-                <div style={{ position: "absolute", top: 30, right: 30 }}>
-                  {[80, 56, 32].map((s, i) => (
-                    <div key={i} style={{
-                      position: "absolute", width: s, height: s, borderRadius: "50%",
-                      border: `1px solid rgba(255,255,255,${0.08 + i * 0.06})`,
-                      top: -s / 2, right: -s / 2,
-                    }} />
-                  ))}
-                </div>
-                <div style={{ marginBottom: "1rem" }}>
-                  <IconCloud size={44} color={COLORS.pale} />
-                </div>
-                <h3 style={{ color: COLORS.white, fontFamily: "'DM Serif Display', serif", fontSize: "1.8rem", lineHeight: 1.2, marginBottom: "0.75rem" }}>
-                  Your trusted partner<br /><em>in the cloud era</em>
-                </h3>
-                <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.9rem", lineHeight: 1.6 }}>
-                  Founded on the belief that technology should accelerate your vision, not complicate it.
-                </p>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.15}>
-              <div>
-                <div style={{ color: COLORS.primary, fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>About Nexora Prime</div>
-                <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", lineHeight: 1.15, marginBottom: "1.5rem", color: COLORS.text }}>
-                  Built for<br /><span style={{ color: COLORS.primary }}>production, not proposals</span>
+              <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+                <div style={{ color: COLORS.primary, fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>What We Do</div>
+                <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: COLORS.text, lineHeight: 1.2, marginBottom: "1rem" }}>
+                  Azure & AI consulting<br /><span style={{ color: COLORS.primary }}>for every layer of your stack</span>
                 </h2>
-                <p style={{ color: COLORS.muted, lineHeight: 1.8, marginBottom: "1.2rem", fontSize: "0.97rem" }}>
-                  Nexora Prime is a specialist Azure and AI consulting practice. We help organizations design, build, and operate cloud solutions that are secure, intelligent, and built to grow with you.
+                <p style={{ color: COLORS.muted, maxWidth: 540, margin: "0 auto", lineHeight: 1.7, fontSize: "0.97rem" }}>
+                  From initial strategy to production operations, we cover every layer of your cloud journey.
                 </p>
-                <p style={{ color: COLORS.muted, lineHeight: 1.8, marginBottom: "2rem", fontSize: "0.97rem" }}>
-                  Every engagement is grounded in deep Microsoft expertise and real-world engineering practice — architecture decisions are made with your business goals in view, not just the technical spec sheet.
-                </p>
-                <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
-                  {["Azure Certified", "AI-First Approach", "Agile Delivery"].map((item) => (
-                    <div key={item} style={{ display: "flex", alignItems: "center", gap: 8, color: COLORS.text, fontSize: "0.88rem", fontWeight: 500 }}>
-                      <span style={{ width: 22, height: 22, borderRadius: "50%", background: COLORS.ghost, display: "flex", alignItems: "center", justifyContent: "center", color: COLORS.primary, fontSize: "0.7rem", fontWeight: 700 }}>✓</span>
-                      {item}
-                    </div>
-                  ))}
-                </div>
               </div>
             </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* SERVICES */}
-      <section id="services" style={{ padding: "7rem 2rem", background: COLORS.ghost }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <FadeIn>
-            <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-              <div style={{ color: COLORS.primary, fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>What We Do</div>
-              <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: COLORS.text, lineHeight: 1.2, marginBottom: "1rem" }}>
-                Every layer of<br /><span style={{ color: COLORS.primary }}>the Azure stack</span>
-              </h2>
-              <p style={{ color: COLORS.muted, maxWidth: 540, margin: "0 auto", lineHeight: 1.7, fontSize: "0.97rem" }}>
-                From initial strategy to production operations, we cover every layer of your cloud journey.
-              </p>
-            </div>
-          </FadeIn>
-          <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }}>
-            {SERVICES.map((s, i) => (
-              <FadeIn key={s.title} delay={i * 0.08}>
-                <div className="service-card">
-                  <div style={{ marginBottom: "1rem" }}>{s.icon}</div>
-                  <h3 style={{ fontSize: "1.05rem", fontWeight: 700, marginBottom: "0.75rem", color: COLORS.text }}>{s.title}</h3>
-                  <p style={{ color: COLORS.muted, fontSize: "0.88rem", lineHeight: 1.7, marginBottom: "1.25rem" }}>{s.desc}</p>
-
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* WHY US */}
-      <section id="why-us" style={{
-        padding: "7rem 2rem",
-        background: `linear-gradient(135deg, ${COLORS.darker} 0%, ${COLORS.primary} 100%)`,
-        position: "relative", overflow: "hidden",
-      }}>
-        <div style={{ position: "absolute", inset: 0, opacity: 0.04 }}>
-          <svg width="100%" height="100%"><defs><pattern id="dots" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="white" /></pattern></defs><rect width="100%" height="100%" fill="url(#dots)" /></svg>
-        </div>
-        <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative" }}>
-          <FadeIn>
-            <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-              <div style={{ color: COLORS.pale, fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>Why Nexora Prime</div>
-              <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: COLORS.white, lineHeight: 1.2 }}>
-                What working with us<br /><em style={{ color: COLORS.pale }}>looks like</em>
-              </h2>
-            </div>
-          </FadeIn>
-          <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1.5rem", marginBottom: "5rem" }}>
-            {WHY_US.map((s, i) => (
-              <FadeIn key={s.num} delay={i * 0.1}>
-                <div className="stat-card">
-                  <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: "2.6rem", color: COLORS.pale, lineHeight: 1, marginBottom: "0.75rem" }}>{s.num}</div>
-                  <div style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.88rem", lineHeight: 1.4 }}>{s.label}</div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-          <FadeIn>
             <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }}>
-              {[
-                { icon: <IconTarget />, title: "Outcome-Driven", desc: "We measure success by your business results — not compute hours or ticket counts." },
-                { icon: <IconLayers />, title: "Long-Term Partnership", desc: "We stay with you post-launch. Our engagement model is designed for continuity, not handoffs." },
-                { icon: <IconFlask />, title: "Continuous Innovation", desc: "We stay at the frontier of Azure and AI so you benefit from what's new — without the risk." },
-              ].map((p, i) => (
-                <FadeIn key={p.title} delay={0.1 + i * 0.1}>
-                  <div style={{ padding: "2rem", borderRadius: 16, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                    <div style={{ marginBottom: "0.75rem" }}>{p.icon}</div>
-                    <h4 style={{ color: COLORS.white, fontWeight: 700, marginBottom: "0.5rem", fontSize: "1rem" }}>{p.title}</h4>
-                    <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.87rem", lineHeight: 1.6 }}>{p.desc}</p>
+              {SERVICES.map((s, i) => (
+                <FadeIn key={s.title} delay={i * 0.08}>
+                  <div className="service-card">
+                    <div style={{ marginBottom: "1rem" }}>{s.icon}</div>
+                    <h3 style={{ fontSize: "1.05rem", fontWeight: 700, marginBottom: "0.75rem", color: COLORS.text }}>{s.title}</h3>
+                    <p style={{ color: COLORS.muted, fontSize: "0.88rem", lineHeight: 1.7, marginBottom: "1.25rem" }}>{s.desc}</p>
+                    <div aria-label={`${s.title} specialties`}>
+                      {s.tags.map((tag) => (
+                        <span key={tag} className="tag">{tag}</span>
+                      ))}
+                    </div>
                   </div>
                 </FadeIn>
               ))}
             </div>
-          </FadeIn>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* CONTACT */}
-      <section id="contact" style={{ padding: "7rem 2rem", background: COLORS.white }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <FadeIn>
-            <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-              <div style={{ color: COLORS.primary, fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>Contact</div>
-              <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: COLORS.text, lineHeight: 1.2, marginBottom: "1rem" }}>
-                Let's start a<br /><span style={{ color: COLORS.primary }}>conversation</span>
-              </h2>
-              <p style={{ color: COLORS.muted, maxWidth: 480, margin: "0 auto", lineHeight: 1.7 }}>
-                Whether you're planning a cloud migration, an AI initiative, or just exploring options — we're happy to talk.
-              </p>
-            </div>
-          </FadeIn>
-
-          <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", alignItems: "start" }}>
-            {/* Left — contact info */}
+        {/* WHY US */}
+        <section id="why-us" style={{
+          padding: "7rem 2rem",
+          background: `linear-gradient(135deg, ${COLORS.darker} 0%, ${COLORS.primary} 100%)`,
+          position: "relative", overflow: "hidden",
+        }}>
+          <div style={{ position: "absolute", inset: 0, opacity: 0.04 }}>
+            <svg width="100%" height="100%"><defs><pattern id="dots" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="white" /></pattern></defs><rect width="100%" height="100%" fill="url(#dots)" /></svg>
+          </div>
+          <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative" }}>
             <FadeIn>
-              <div className="contact-info-card" style={{
-                borderRadius: 24,
-                background: `linear-gradient(135deg, ${COLORS.darker}, ${COLORS.primary})`,
-                padding: "3rem", color: COLORS.white,
-              }}>
-                <h3 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.7rem", marginBottom: "1.5rem" }}>Get in touch</h3>
-                <p style={{ color: "rgba(255,255,255,0.7)", lineHeight: 1.7, marginBottom: "2.5rem", fontSize: "0.92rem" }}>
-                  Reach us directly by email. We typically respond within one business day and are happy to schedule a free discovery call.
+              <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+                <div style={{ color: COLORS.pale, fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>Why Nexora Prime</div>
+                <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: COLORS.white, lineHeight: 1.2 }}>
+                  What working with us<br /><em style={{ color: COLORS.pale }}>looks like</em>
+                </h2>
+              </div>
+            </FadeIn>
+            <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1.5rem", marginBottom: "5rem" }}>
+              {WHY_US.map((s, i) => (
+                <FadeIn key={s.num} delay={i * 0.1}>
+                  <div className="stat-card">
+                    <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: "2.6rem", color: COLORS.pale, lineHeight: 1, marginBottom: "0.75rem" }}>{s.num}</div>
+                    <div style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.88rem", lineHeight: 1.4 }}>{s.label}</div>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+            <FadeIn>
+              <div className="services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem" }}>
+                {[
+                  { icon: <IconTarget />, title: "Outcome-Driven", desc: "We measure success by your business results — not compute hours or ticket counts." },
+                  { icon: <IconLayers />, title: "Long-Term Partnership", desc: "We stay with you post-launch. Our engagement model is designed for continuity, not handoffs." },
+                  { icon: <IconFlask />, title: "Continuous Innovation", desc: "We stay at the frontier of Azure and AI so you benefit from what's new — without the risk." },
+                ].map((p, i) => (
+                  <FadeIn key={p.title} delay={0.1 + i * 0.1}>
+                    <div style={{ padding: "2rem", borderRadius: 16, background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}>
+                      <div style={{ marginBottom: "0.75rem" }}>{p.icon}</div>
+                      <h4 style={{ color: COLORS.white, fontWeight: 700, marginBottom: "0.5rem", fontSize: "1rem" }}>{p.title}</h4>
+                      <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.87rem", lineHeight: 1.6 }}>{p.desc}</p>
+                    </div>
+                  </FadeIn>
+                ))}
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* CONTACT */}
+        <section id="contact" style={{ padding: "7rem 2rem", background: COLORS.white }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <FadeIn>
+              <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+                <div style={{ color: COLORS.primary, fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>Contact</div>
+                <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: COLORS.text, lineHeight: 1.2, marginBottom: "1rem" }}>
+                  Let's start a<br /><span style={{ color: COLORS.primary }}>conversation</span>
+                </h2>
+                <p style={{ color: COLORS.muted, maxWidth: 480, margin: "0 auto", lineHeight: 1.7 }}>
+                  Whether you're planning a cloud migration, an AI initiative, or just exploring options — we're happy to talk.
                 </p>
-                <div
-                  className="contact-person-row"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1.25rem",
-                    marginBottom: "2rem",
-                  }}
-                >
-                  <img
-                    src="/AI Enchanced.png"
-                    alt="Dimitar Iliev"
-                    className="person-photo"
-                    style={{
-                      width: 100,
-                      height: 100,
-                      borderRadius: "50%",
-                      objectFit: "cover",
-                      border: "3px solid rgba(255,255,255,0.15)",
-                    }}
-                  />
-
-                  <div>
-                    <div
-                      style={{
-                        color: COLORS.white,
-                        fontSize: "1.15rem",
-                        fontWeight: 700,
-                        marginBottom: 4,
-                      }}
-                    >
-                      Dimitar Iliev
-                    </div>
-
-                    <div
-                      style={{
-                        color: COLORS.pale,
-                        fontSize: "0.9rem",
-                        fontWeight: 600,
-                      }}
-                    >
-                      Founder & CEO
-                    </div>
-                  </div>
-                </div>
-                <div style={{ marginTop: "2.5rem", paddingTop: "2rem", borderTop: "1px solid rgba(255,255,255,0.12)" }}>
-                  <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.72rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.75rem" }}>Response time</div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#4ade80", display: "block", boxShadow: "0 0 6px #4ade8088" }} />
-                    <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.88rem" }}>Usually within 24 hours</span>
-                  </div>
-                </div>
               </div>
             </FadeIn>
 
-            {/* Right — Formspree form */}
-            <FadeIn delay={0.15}>
-              <div className="contact-form-card" style={{ background: COLORS.ghost, borderRadius: 24, padding: "3rem" }}>
-                <h3 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.4rem", color: COLORS.text, marginBottom: "0.5rem" }}>Start a project</h3>
-                <p style={{ color: COLORS.muted, fontSize: "0.88rem", marginBottom: "2rem" }}>Tell us about your project and we'll get back to you.</p>
+            <div className="contact-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", alignItems: "start" }}>
+              {/* Left — contact info */}
+              <FadeIn>
+                <div className="contact-info-card" style={{
+                  borderRadius: 24,
+                  background: `linear-gradient(135deg, ${COLORS.darker}, ${COLORS.primary})`,
+                  padding: "3rem", color: COLORS.white,
+                }}>
+                  <h3 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.7rem", marginBottom: "1.5rem" }}>Get in touch</h3>
+                  <p style={{ color: "rgba(255,255,255,0.7)", lineHeight: 1.7, marginBottom: "2.5rem", fontSize: "0.92rem" }}>
+                    Reach us directly by email. We typically respond within one business day and are happy to schedule a free discovery call.
+                  </p>
+                  <div
+                    className="contact-person-row"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1.25rem",
+                      marginBottom: "2rem",
+                    }}
+                  >
+                    <img
+                      src="/AI Enchanced.png"
+                      alt="Dimitar Iliev"
+                      className="person-photo"
+                      style={{
+                        width: 100,
+                        height: 100,
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                        border: "3px solid rgba(255,255,255,0.15)",
+                      }}
+                    />
 
-                {formStatus === "success" ? (
-                  <div style={{ textAlign: "center", padding: "3rem 1rem" }}>
-                    <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "center" }}>
-                      <IconShieldCheck size={44} color={COLORS.primary} />
+                    <div>
+                      <div
+                        style={{
+                          color: COLORS.white,
+                          fontSize: "1.15rem",
+                          fontWeight: 700,
+                          marginBottom: 4,
+                        }}
+                      >
+                        Dimitar Iliev
+                      </div>
+
+                      <div
+                        style={{
+                          color: COLORS.pale,
+                          fontSize: "0.9rem",
+                          fontWeight: 600,
+                        }}
+                      >
+                        Founder & CEO
+                      </div>
                     </div>
-                    <h4 style={{ color: COLORS.text, marginBottom: "0.5rem", fontSize: "1.1rem" }}>Message sent!</h4>
-                    <p style={{ color: COLORS.muted, fontSize: "0.88rem" }}>We'll get back to you within 24 hours.</p>
-                    <button
-                      onClick={() => setFormStatus("idle")}
-                      style={{ marginTop: "1.5rem", background: "none", border: "none", color: COLORS.primary, fontWeight: 600, cursor: "pointer", fontSize: "0.88rem" }}
-                    >Send another message</button>
                   </div>
-                ) : (
-                  <>
-                    {[
-                      { label: "Your name", name: "name", type: "text", placeholder: "Jane Smith" },
-                      { label: "Your email", name: "email", type: "email", placeholder: "jane@company.com" },
-                      { label: "Company", name: "company", type: "text", placeholder: "Company name" },
-                    ].map(({ label, name, type, placeholder }) => (
-                      <div key={name} style={{ marginBottom: "1.25rem" }}>
-                        <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: COLORS.text, marginBottom: 6, letterSpacing: "0.02em" }}>{label}</label>
-                        <input
-                          type={type}
-                          name={name}
-                          placeholder={placeholder}
-                          value={formData[name]}
-                          onChange={(e) => setFormData({ ...formData, [name]: e.target.value })}
+                  <div style={{ marginTop: "2.5rem", paddingTop: "2rem", borderTop: "1px solid rgba(255,255,255,0.12)" }}>
+                    <div style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.72rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.75rem" }}>Response time</div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#4ade80", display: "block", boxShadow: "0 0 6px #4ade8088" }} />
+                      <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.88rem" }}>Usually within 24 hours</span>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+
+              {/* Right — Formspree form */}
+              <FadeIn delay={0.15}>
+                <div className="contact-form-card" style={{ background: COLORS.ghost, borderRadius: 24, padding: "3rem" }}>
+                  <h3 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "1.4rem", color: COLORS.text, marginBottom: "0.5rem" }}>Start a project</h3>
+                  <p style={{ color: COLORS.muted, fontSize: "0.88rem", marginBottom: "2rem" }}>Tell us about your project and we'll get back to you.</p>
+
+                  {formStatus === "success" ? (
+                    <div style={{ textAlign: "center", padding: "3rem 1rem" }}>
+                      <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "center" }}>
+                        <IconShieldCheck size={44} color={COLORS.primary} />
+                      </div>
+                      <h4 style={{ color: COLORS.text, marginBottom: "0.5rem", fontSize: "1.1rem" }}>Message sent!</h4>
+                      <p style={{ color: COLORS.muted, fontSize: "0.88rem" }}>We'll get back to you within 24 hours.</p>
+                      <button
+                        onClick={() => setFormStatus("idle")}
+                        style={{ marginTop: "1.5rem", background: "none", border: "none", color: COLORS.primary, fontWeight: 600, cursor: "pointer", fontSize: "0.88rem" }}
+                      >Send another message</button>
+                    </div>
+                  ) : (
+                    <>
+                      {[
+                        { label: "Your name", name: "name", type: "text", placeholder: "Jane Smith" },
+                        { label: "Your email", name: "email", type: "email", placeholder: "jane@company.com" },
+                        { label: "Company", name: "company", type: "text", placeholder: "Company name" },
+                      ].map(({ label, name, type, placeholder }) => (
+                        <div key={name} style={{ marginBottom: "1.25rem" }}>
+                          <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: COLORS.text, marginBottom: 6, letterSpacing: "0.02em" }}>{label}</label>
+                          <input
+                            type={type}
+                            name={name}
+                            placeholder={placeholder}
+                            value={formData[name]}
+                            onChange={(e) => setFormData({ ...formData, [name]: e.target.value })}
+                            style={{
+                              width: "100%", padding: "0.75rem 1rem",
+                              border: `1.5px solid ${COLORS.pale}`, borderRadius: 10,
+                              fontFamily: "'Sora', sans-serif", fontSize: "0.9rem",
+                              background: COLORS.white, color: COLORS.text, outline: "none",
+                              transition: "border-color 0.2s",
+                            }}
+                            onFocus={(e) => e.target.style.borderColor = COLORS.primary}
+                            onBlur={(e) => e.target.style.borderColor = COLORS.pale}
+                          />
+                        </div>
+                      ))}
+                      <div style={{ marginBottom: "2rem" }}>
+                        <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: COLORS.text, marginBottom: 6 }}>Message</label>
+                        <textarea
+                          name="message"
+                          rows={4}
+                          placeholder="Tell us about your project, goals, or questions..."
+                          value={formData.message}
+                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                           style={{
                             width: "100%", padding: "0.75rem 1rem",
                             border: `1.5px solid ${COLORS.pale}`, borderRadius: 10,
                             fontFamily: "'Sora', sans-serif", fontSize: "0.9rem",
-                            background: COLORS.white, color: COLORS.text, outline: "none",
+                            background: COLORS.white, color: COLORS.text,
+                            outline: "none", resize: "vertical",
                             transition: "border-color 0.2s",
                           }}
                           onFocus={(e) => e.target.style.borderColor = COLORS.primary}
                           onBlur={(e) => e.target.style.borderColor = COLORS.pale}
                         />
                       </div>
-                    ))}
-                    <div style={{ marginBottom: "2rem" }}>
-                      <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, color: COLORS.text, marginBottom: 6 }}>Message</label>
-                      <textarea
-                        name="message"
-                        rows={4}
-                        placeholder="Tell us about your project, goals, or questions..."
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        style={{
-                          width: "100%", padding: "0.75rem 1rem",
-                          border: `1.5px solid ${COLORS.pale}`, borderRadius: 10,
-                          fontFamily: "'Sora', sans-serif", fontSize: "0.9rem",
-                          background: COLORS.white, color: COLORS.text,
-                          outline: "none", resize: "vertical",
-                          transition: "border-color 0.2s",
-                        }}
-                        onFocus={(e) => e.target.style.borderColor = COLORS.primary}
-                        onBlur={(e) => e.target.style.borderColor = COLORS.pale}
-                      />
-                    </div>
-                    <button
-                      onClick={handleSubmit}
-                      disabled={formStatus === "sending" || !formData.email}
-                      className="cta-btn cta-teal"
-                      style={{ width: "100%", justifyContent: "center" }}
-                    >
-                      {formStatus === "sending" ? "Sending..." : "Send Message →"}
-                    </button>
-                    {formStatus === "error" && (
-                      <p style={{ color: "#e05252", fontSize: "0.8rem", textAlign: "center", marginTop: "1rem" }}>
-                        Something went wrong. Please email us directly.
-                      </p>
-                    )}
-                  </>
-                )}
-              </div>
-            </FadeIn>
+                      <button
+                        onClick={handleSubmit}
+                        disabled={formStatus === "sending" || !formData.email}
+                        className="cta-btn cta-teal"
+                        style={{ width: "100%", justifyContent: "center" }}
+                      >
+                        {formStatus === "sending" ? "Sending..." : "Send Message →"}
+                      </button>
+                      {formStatus === "error" && (
+                        <p style={{ color: "#e05252", fontSize: "0.8rem", textAlign: "center", marginTop: "1rem" }}>
+                          Something went wrong. Please email us directly.
+                        </p>
+                      )}
+                    </>
+                  )}
+                </div>
+              </FadeIn>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* FOOTER */}
-      <footer style={{ background: COLORS.darker, padding: "3rem 2rem", color: "rgba(255,255,255,0.5)", fontSize: "0.85rem" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div className="footer-grid" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <img src="/favicon.ico" alt="Nexora Prime" className="logo-mark" style={{ borderRadius: "10px", objectFit: "contain" }} />
-              <span style={{ color: COLORS.white, fontWeight: 700 }}>Nexora<span style={{ fontFamily: "'DM Serif Display', serif", fontStyle: "italic", color: COLORS.pale }}>Prime</span></span>
-            </div>
-            <div>© {new Date().getFullYear()} Nexora Prime. All rights reserved.</div>
-            <div className="footer-links" style={{ display: "flex", gap: "2rem" }}>
-              {NAV_LINKS.map((l) => (
-                <button key={l} onClick={() => scrollTo(l.toLowerCase().replace(" ", "-"))}
-                  style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.45)", fontSize: "0.82rem", transition: "color 0.2s" }}
-                  onMouseOver={(e) => e.target.style.color = COLORS.pale}
-                  onMouseOut={(e) => e.target.style.color = "rgba(255,255,255,0.45)"}
-                >{l}</button>
-              ))}
+        {/* FOOTER */}
+        <footer style={{ background: COLORS.darker, padding: "3rem 2rem", color: "rgba(255,255,255,0.5)", fontSize: "0.85rem" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <div className="footer-grid" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <img src="/favicon.ico" alt="Nexora Prime" className="logo-mark" style={{ borderRadius: "10px", objectFit: "contain" }} />
+                <span style={{ color: COLORS.white, fontWeight: 700 }}>Nexora<span style={{ fontFamily: "'DM Serif Display', serif", fontStyle: "italic", color: COLORS.pale }}>Prime</span></span>
+              </div>
+              <div>© {new Date().getFullYear()} Nexora Prime. Azure AI consulting &amp; cloud architecture.</div>
+              <div className="footer-links" style={{ display: "flex", gap: "2rem" }}>
+                {NAV_LINKS.map((l) => (
+                  <button key={l} onClick={() => scrollTo(l.toLowerCase().replace(" ", "-"))}
+                    style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.45)", fontSize: "0.82rem", transition: "color 0.2s" }}
+                    onMouseOver={(e) => e.target.style.color = COLORS.pale}
+                    onMouseOut={(e) => e.target.style.color = "rgba(255,255,255,0.45)"}
+                  >{l}</button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </>
   );
 }
