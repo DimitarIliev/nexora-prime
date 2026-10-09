@@ -1048,7 +1048,7 @@ export default function NexoraPrime() {
                     }}
                   >
                     <img
-                      src="/AI Enchanced.png"
+                      src="/AI Enchanced.jpg"
                       alt="Dimitar Iliev"
                       className="person-photo"
                       style={{
